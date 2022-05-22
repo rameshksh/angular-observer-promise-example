@@ -13,24 +13,27 @@ export function example3() {
     observer.complete();
   });
 
+  observable$.subscribe((x) => console.log('observable$---', x));
+
   // ✅ 1. Cancelling by using the unsubscribe method
   const observable1$ = interval(1000);
-  const subscription1$ = observable1$.subscribe((x) => console.log(x));
+  const subscription1$ = observable1$.subscribe((x) =>
+    console.log('observable1$---', x)
+  );
 
   subscription1$.unsubscribe();
 
   // ✅ 2. Cancelling by taking a number of elements
   const observable2$ = interval(1000);
 
-  observable2$.pipe(take(5)).subscribe((x) => console.log(x));
+  observable2$.pipe(take(5)).subscribe((x) => console.log('observable2$--', x));
 
   // ✅ 3. Conditionally stop listineing for more elements
   const subject3$ = new Subject();
   const observable3$ = interval(1000);
 
   observable3$.pipe(takeUntil(subject3$)).subscribe((x) => {
-    console.log('observer subscribed');
-    console.log(x);
+    console.log('observer subscribed', x);
     if (Math.random() > 0.5) {
       subject3$.next(1);
       subject3$.complete();

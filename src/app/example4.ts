@@ -1,6 +1,8 @@
 import { interval, Observable } from 'rxjs';
 
 export function example4() {
+  console.log('example4 observable vs promise');
+
   const foo = new Promise((resolve) => {
     console.log('1. Callback execution');
     resolve(true);
@@ -18,15 +20,15 @@ export function example4() {
   // 2. Promise resolution
 
   const observable$ = new Observable((observer) => {
-    console.log('1. Execution of observable body');
+    console.log('4. Execution of observable body');
     observer.next(1);
     observer.complete();
   });
 
-  console.log('2. Pre Subscribe statement');
+  console.log('5. Pre Subscribe statement');
 
   observable$.subscribe(() => {
-    console.log('3. Execution of subscribe callback');
+    console.log('6. Execution of subscribe callback');
   });
 
   // ✅ console output

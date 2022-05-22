@@ -16,19 +16,18 @@ export function example2() {
   });
 
   x.then((res) => {
-    console.log('promise resolved');
-    console.log(res);
+    console.log('promise resolved---', res);
   });
 
   // Observables
   const observable$ = Observable.create((observer) => {
     // ✅ you can pass multiple values by using `next` method
-    console.log('inside observer');
-    observer.next(1);
-    observer.next(2);
-    observer.next(3);
+    console.log('observer created');
+    observer.next('next - 1');
+    observer.next('next - 2');
+    observer.next('next - 3');
     observer.complete();
   });
 
-  observable$.subscribe(s => console.log(s));
+  observable$.subscribe((s) => console.log('subscribe---', s));
 }

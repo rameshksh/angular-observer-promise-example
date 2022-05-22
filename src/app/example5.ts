@@ -5,11 +5,16 @@ export function example5() {
     console.log('2. Timeout callback');
   }, 0);
 
-  Promise.resolve().then(() => {
-    console.log('3. Promise callback');
+  const p = new Promise((resolve) => {
+    console.log('3. Promise created');
+    resolve(true);
   });
 
-  console.log('4. End');
+ p.then(() => {
+    console.log('4. Promise resolve callback');
+  });
+
+  console.log('5. End');
 
   // ✅ outputs
   // 1. Start
